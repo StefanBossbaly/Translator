@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class SymbolTable {
 
@@ -115,19 +116,27 @@ public class SymbolTable {
 		/**
 		 * Number of parameters that our function accepts
 		 */
-		private int numParameters;
+		private ArrayList<String> parameterIdentifiers;
 
 		/**
-		 * Symbol table
+		 * Symbol table for this scope
 		 */
 		private SymbolTable table;
 
 		
-		public FunctionEntry(String identifer, Type type, int numParameters) {
+		public FunctionEntry(String identifer, Type type, Collection<String> parameterIdentifiers) {
 			super(identifer, type);
-			this.numParameters = numParameters;
+			this.parameterIdentifiers = new ArrayList<String>(parameterIdentifiers);
+			
 			table = new SymbolTable();
 		}
 
+	}
+	
+	public class VariableEntry extends SymbolEntry{
+		
+		public VariableEntry(String identifer, Type type){
+			super(identifer, type);
+		}
 	}
 }
