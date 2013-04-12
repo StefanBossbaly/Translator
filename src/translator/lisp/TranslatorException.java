@@ -1,3 +1,4 @@
+package translator.lisp;
 
 public class TranslatorException extends RuntimeException {
 

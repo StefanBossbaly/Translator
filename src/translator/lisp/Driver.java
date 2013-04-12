@@ -1,3 +1,5 @@
+package translator.lisp;
+
 
 public class Driver {
 
@@ -6,9 +8,7 @@ public class Driver {
 	 */
 	public static void main(String[] args) {
 		LISPtoCTranslator translator = new LISPtoCTranslator();
-		
-		System.out.println(translator.translateStatment("(ADD 1 (ADD 2 1))"));
-
+		System.out.println(translator.translateStatment("(ADD 2 2)"));
 	}
 
 }
