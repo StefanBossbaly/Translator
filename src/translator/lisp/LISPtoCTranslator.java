@@ -19,12 +19,31 @@ public class LISPtoCTranslator {
 		list.add("num1");
 		list.add("num2");
 		
+		ArrayList<String> list2 = new ArrayList<String>();
+		list2.add("num1");
+		
 		// Add the intrinsic functions
+		//Numeric Operations
 		table.addIntrinsicFunctionEntry("ADD", list);
 		table.addIntrinsicFunctionEntry("SUBTRACT", list);
 		table.addIntrinsicFunctionEntry("MULTIPLY", list);
 		table.addIntrinsicFunctionEntry("QUOTIENT", list);
 		table.addIntrinsicFunctionEntry("REMAINDER", list);
+		
+		//Rational Operations
+		table.addIntrinsicFunctionEntry("EQ", list);
+		table.addIntrinsicFunctionEntry("NEQ", list);
+		table.addIntrinsicFunctionEntry("LT", list);
+		table.addIntrinsicFunctionEntry("LTE", list);
+		table.addIntrinsicFunctionEntry("GT", list);
+		table.addIntrinsicFunctionEntry("GTE", list);
+		
+		//Logical Operations
+		table.addIntrinsicFunctionEntry("AND", list);
+		table.addIntrinsicFunctionEntry("OR", list);
+		table.addIntrinsicFunctionEntry("NOT", list2);
+		
+		//Exception to the rule
 		table.addIntrinsicFunctionEntry("SET", list);
 	}
 

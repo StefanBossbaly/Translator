@@ -12,26 +12,46 @@ public abstract class FunctionEntry extends SymbolEntry {
 	 * Number of parameters that our function accepts
 	 */
 	protected ArrayList<String> parameterIdentifiers;
-	
+
 	/**
 	 * Symbol table for the outside scope
 	 */
 	protected SymbolTable superTable;
 
-	public FunctionEntry(String identifer, SymbolTable superTable, Collection<String> parameterIdentifiers) {
+	public FunctionEntry(String identifer, SymbolTable superTable,
+			Collection<String> parameterIdentifiers) {
 		super(identifer);
 		this.parameterIdentifiers = new ArrayList<String>(parameterIdentifiers);
 		this.superTable = superTable;
 	}
-	
+
+	protected void checkParameters(List<String> parameters) {
+		for (String id : parameters) {
+			if (!isLiteral(id)) {
+				if (!superTable.hasIdentifer(id)) {
+					throw new TranslatorException(String.format(
+							"Variable %s is undefined", id));
+				}
+			}
+
+		}
+	}
+
 	public String generateMethodCall(List<String> parameters) {
 		// Make sure we have the same amount of parameters
 		if (parameters.size() != parameterIdentifiers.size()) {
-			throw new TranslatorException(String.format("Function %s requires %d parameters, %d parameters provided", getIdentifier(),
-					parameterIdentifiers.size(), parameters.size()));
+			throw new TranslatorException(
+					String.format(
+							"Function %s requires %d parameters, %d parameters provided",
+							getIdentifier(), parameterIdentifiers.size(),
+							parameters.size()));
 		}
 
-		return String.format("%s(%s)", super.getIdentifier(), join(parameters.toArray(), ","));
+		// Make sure that the varibles exist in our symbol table
+		// checkParameters(parameters);
+
+		return String.format("%s(%s)", super.getIdentifier(),
+				join(parameters.toArray(), ","));
 	}
 
 	public String generateMethodDeclaration() {
@@ -41,7 +61,8 @@ public abstract class FunctionEntry extends SymbolEntry {
 			parameterDeclarations.add(String.format("int %s", parameter));
 		}
 
-		return String.format("int %s(%s)", getIdentifier(), join(parameterDeclarations.toArray(), ","));
+		return String.format("int %s(%s)", getIdentifier(),
+				join(parameterDeclarations.toArray(), ","));
 	}
 
 	private String join(Object r[], String d) {

@@ -29,4 +29,13 @@ public class SymbolEntry {
 
 		return entry.getIdentifier().equals(this.getIdentifier());
 	}
+	
+	protected boolean isLiteral(String id) {
+		try {
+			int literal = Integer.parseInt(id);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
 }

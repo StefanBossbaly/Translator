@@ -8,6 +8,7 @@ public class Driver {
 	 */
 	public static void main(String[] args) {
 		LISPtoCTranslator translator = new LISPtoCTranslator();
-		System.out.println(translator.translateStatment("(SET x (ADD 1 (SUBTRACT 1 123)))"));
+		System.out.println(translator.translateStatment("(SET x (NOT 1))"));
+		System.out.println(translator.translateStatment("(SET x (ADD x 1))"));
 	}
 }
