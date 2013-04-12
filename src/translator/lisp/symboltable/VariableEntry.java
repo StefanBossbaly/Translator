@@ -14,4 +14,8 @@ public class VariableEntry extends SymbolEntry {
 	public String getAssigmentStatement(String rhand) {
 		return String.format("%s = %s", getIdentifier(), rhand);
 	}
+	
+	public String getVariableDeclarationAndAssigment(String rhand){
+		return String.format("int %s = %s", getIdentifier(), rhand);
+	}
 }

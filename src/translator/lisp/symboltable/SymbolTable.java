@@ -44,7 +44,7 @@ public class SymbolTable {
 				return entry;
 		}
 
-		throw new RuntimeException("Identifier does not exist in symbol table");
+		throw new TranslatorException("Identifier does not exist in symbol table");
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class SymbolTable {
 	 */
 	public void addEntry(String identifier) {
 		if (hasIdentifer(identifier)) {
-			throw new RuntimeException("Identifier already exist in symbol table");
+			throw new TranslatorException("Identifier already exist in symbol table");
 		}
 
 		SymbolEntry entry = new SymbolEntry(identifier);
@@ -65,9 +65,9 @@ public class SymbolTable {
 		list.add(entry);
 	}
 
-	public void addFunctionEntry(String idenifier, List<String> parameters) {
+	public void addIntrinsicFunctionEntry(String idenifier, List<String> parameters) {
 		if (hasIdentifer(idenifier)) {
-			throw new RuntimeException("Identifier already exist in symbol table");
+			throw new TranslatorException("Identifier already exist in symbol table");
 		}
 
 		//TODO get rid of hack
@@ -78,10 +78,20 @@ public class SymbolTable {
 		}
 		else
 		{
-			FunctionEntry entry = new FunctionEntry(idenifier, this, parameters);
+			FunctionEntry entry = new IntrinsicFunctionEntry(idenifier, this, parameters);
 			list.add(entry);
 		}
 
+	}
+	
+	public void addDefinedFunctionEntry(String idenifier, List<String> parameters){
+		if (hasIdentifer(idenifier)) {
+			throw new TranslatorException(String.format("Function %s is already defined"));
+		}
+		
+		FunctionEntry entry = new DefinedFunctionEntry(idenifier, this, parameters);
+		
+		list.add(entry);
 	}
 	
 	public void addVariableEntry(String idenifier){

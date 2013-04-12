@@ -23,10 +23,12 @@ public class SetFunctionEntry extends FunctionEntry {
 		if (!superTable.hasIdentifer(varName))
 		{
 			superTable.addVariableEntry(parameters.get(0));
-			output += ((VariableEntry) superTable.getEntry(parameters.get(0))).getVariableDeclaration() + ";\n";
+			output += ((VariableEntry) superTable.getEntry(parameters.get(0))).getVariableDeclarationAndAssigment(parameters.get(1));
 		}
-		
-		output += ((VariableEntry) superTable.getEntry(parameters.get(0))).getAssigmentStatement(parameters.get(1));
+		else
+		{
+			output += ((VariableEntry) superTable.getEntry(parameters.get(0))).getAssigmentStatement(parameters.get(1));
+		}
 		
 		return output;
 	}

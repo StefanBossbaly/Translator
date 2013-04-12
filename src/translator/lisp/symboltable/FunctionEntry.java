@@ -6,17 +6,12 @@ import java.util.List;
 
 import translator.lisp.TranslatorException;
 
-public class FunctionEntry extends SymbolEntry {
+public abstract class FunctionEntry extends SymbolEntry {
 
 	/**
 	 * Number of parameters that our function accepts
 	 */
 	protected ArrayList<String> parameterIdentifiers;
-
-	/**
-	 * Symbol table for this scope
-	 */
-	protected SymbolTable table;
 	
 	/**
 	 * Symbol table for the outside scope
@@ -27,10 +22,8 @@ public class FunctionEntry extends SymbolEntry {
 		super(identifer);
 		this.parameterIdentifiers = new ArrayList<String>(parameterIdentifiers);
 		this.superTable = superTable;
-
-		table = new SymbolTable();
 	}
-
+	
 	public String generateMethodCall(List<String> parameters) {
 		// Make sure we have the same amount of parameters
 		if (parameters.size() != parameterIdentifiers.size()) {

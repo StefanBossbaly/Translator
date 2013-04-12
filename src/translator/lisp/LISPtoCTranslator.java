@@ -20,12 +20,12 @@ public class LISPtoCTranslator {
 		list.add("num2");
 		
 		// Add the intrinsic functions
-		table.addFunctionEntry("ADD", list);
-		table.addFunctionEntry("SUBTRACT", list);
-		table.addFunctionEntry("MULTIPLY", list);
-		table.addFunctionEntry("QUOTIENT", list);
-		table.addFunctionEntry("REMAINDER", list);
-		table.addFunctionEntry("SET", list);
+		table.addIntrinsicFunctionEntry("ADD", list);
+		table.addIntrinsicFunctionEntry("SUBTRACT", list);
+		table.addIntrinsicFunctionEntry("MULTIPLY", list);
+		table.addIntrinsicFunctionEntry("QUOTIENT", list);
+		table.addIntrinsicFunctionEntry("REMAINDER", list);
+		table.addIntrinsicFunctionEntry("SET", list);
 	}
 
 	public String translateStatment(String line) {
