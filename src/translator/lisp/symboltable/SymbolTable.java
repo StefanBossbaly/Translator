@@ -1,4 +1,5 @@
 package translator.lisp.symboltable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -6,7 +7,7 @@ import java.util.List;
 import translator.lisp.TranslatorException;
 
 public class SymbolTable {
-	
+
 	private ArrayList<SymbolEntry> list;
 
 	/**
@@ -56,25 +57,42 @@ public class SymbolTable {
 	 */
 	public void addEntry(String identifier) {
 		if (hasIdentifer(identifier)) {
-			throw new RuntimeException(
-					"Identifier already exist in symbol table");
+			throw new RuntimeException("Identifier already exist in symbol table");
 		}
 
 		SymbolEntry entry = new SymbolEntry(identifier);
 
 		list.add(entry);
 	}
-	
-	public void addFunctionEntry(String idenifier, List<String> parameters){
+
+	public void addFunctionEntry(String idenifier, List<String> parameters) {
 		if (hasIdentifer(idenifier)) {
-			throw new RuntimeException(
-					"Identifier already exist in symbol table");
+			throw new RuntimeException("Identifier already exist in symbol table");
+		}
+
+		//TODO get rid of hack
+		if (idenifier.equals("SET"))
+		{
+			SetFunctionEntry entry = new SetFunctionEntry(idenifier, this, parameters);
+			list.add(entry);
+		}
+		else
+		{
+			FunctionEntry entry = new FunctionEntry(idenifier, this, parameters);
+			list.add(entry);
+		}
+
+	}
+	
+	public void addVariableEntry(String idenifier){
+		if (hasIdentifer(idenifier)) {
+			throw new RuntimeException("Identifier already exist in symbol table");
 		}
 		
-		FunctionEntry entry = new FunctionEntry(idenifier, parameters);
-		
-		list.add(entry);
+		VariableEntry entry = new VariableEntry(idenifier);
 
+		list.add(entry);
+		
 	}
 
 	/**
